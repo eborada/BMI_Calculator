@@ -14,75 +14,66 @@ class BMICalculator extends React.Component {
     }
 
     renderBmiMessage() {
-    	const MAX_HEIGHT = 2.72;
-    	const MAX_WEIGHT = 635;
+		const MAX_HEIGHT = 2.72;
+		const MAX_WEIGHT = 635;
 
-        if (this.state.height > MAX_HEIGHT) {
-        	return (
-        		<div>
-        		<p>Check Height Input</p>
-        		</div>
-        		)
-        }
-        if (this.state.weight > MAX_WEIGHT ) {
+		if (this.state.height > MAX_HEIGHT || this.state.weight > MAX_WEIGHT) {
 			return (
-        		<div>
-        		<p>Check Weight Input</p>
-        		</div>
-        		)        
+				<div>
+				<p>Check Input</p>
+				</div>
+				)
 		}
+
 		else if (this.state.bmi > 0 && this.state.bmi <= 18) {
-			return(
-                <div>
-                <span>BMI:</span> {this.state.bmi}
-                <br />
-                <p>Patient is: Underweight</p>
-                </div>
-                )
+			return (
+				<div>
+				<span>BMI:</span> {this.state.bmi}
+				<br />
+				<p>Patient is: Underweight</p>
+				</div>
+		       )
 		} 
 		else if (this.state.bmi > 18 && this.state.bmi <= 25) {
-			return(                
-                <div>
-                <span>BMI:</span> {this.state.bmi}
-                <br />
-                <p>Patient is: Healthy</p>
-                </div>
-                )
+			return (                
+				<div>
+				<span>BMI:</span> {this.state.bmi}
+				<br />
+				<p>Patient is: Healthy</p>
+				</div>
+			)
 		} 
 		else if (this.state.bmi > 25 && this.state.bmi <= 30) {
-		    return(                
-                <div>
-                <span>BMI:</span> {this.state.bmi}
-                <br />
-                <p>Patient is: Overweight</p>
-                </div>
-                )
+			return(                
+				<div>
+				<span>BMI:</span> {this.state.bmi}
+				<br />
+				<p>Patient is: Overweight</p>
+				</div>
+			)
 		} 
 		else if (this.state.bmi > 30) {
 			return(
-                <div>
-                <span>BMI:</span> {this.state.bmi}
-                <br />
-                <p>Patient is: Obese</p>
-                </div>
-                )
+				<div>
+				<span>BMI:</span> {this.state.bmi}
+				<br />
+				<p>Patient is: Obese</p>
+				</div>
+			)
 		}
-        else if( isNaN(this.state.bmi) || this.state.bmi == 0) {
-            if (isNaN(this.state.weight)) {
-
-            }
-            return (<p>Please check input</p>)
-        }
+		else if(isNaN(this.state.bmi) || this.state.bmi == 0) {
+		    return (<p>Please check input</p>)
+		}
 
 	}
+	
     handleClick() {
-    var weight = this.state.weight;
+    	var weight = this.state.weight;
 	var height = this.state.height;
 	this.setState({bmi: Math.round(weight / height / height)});
     }
     onChange(e) {
     	this.setState({[e.target.name]: e.target.value});
-
     }
 
     render() {
@@ -93,16 +84,16 @@ class BMICalculator extends React.Component {
             </div>
         	<form onSubmit={this.onFormSubmit}>
                 <p className="text">Enter weight in kg:</p>
-				<input type="text" name="weight" onChange={this.onChange} />
-				<br />
+		<input type="text" name="weight" onChange={this.onChange} />
+		<br />
                 <p className="text">Enter height in meters:</p>
-				<input type="text" name="height" onChange={this.onChange} />
-				<br />
-				<button type="button" onClick={this.handleClick}>BMI</button> <br/>
+		<input type="text" name="height" onChange={this.onChange} />
+		<br />
+		<button type="button" onClick={this.handleClick}>BMI</button> <br/>
+		</form>	
                 <div id="output">
                 {this.renderBmiMessage()}
-                </div>
-			</form>
+                </div>	
         </div>
         )
     }
